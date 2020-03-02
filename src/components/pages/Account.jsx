@@ -1,7 +1,6 @@
 import React from 'react';
 import app from '../../firebase.js';
 import BottomNav from '../layout/BottomNav.jsx';
-import { Redirect } from 'react-router';
 
 export default function Account({ history }) {
 	const signOut = () => {

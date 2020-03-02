@@ -5,9 +5,9 @@ import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
 export default function Progress() {
 	const [chosenExercise, setChosenExercise] = useState('null');
 	const data = [
-		{ name: 'Page A', uv: 400, pv: 2400, amt: 2400 },
-		{ name: 'Page B', uv: 300, pv: 1200, amt: 2000 },
-		{ name: 'Page C', uv: 400, pv: 2400, amt: 2400 },
+		{ name: 'Date A', value: 100 },
+		{ name: 'Date B', value: 200 },
+		{ name: 'Date C', value: 400 },
 	];
 
 	const handleChange = e => {
@@ -29,10 +29,10 @@ export default function Progress() {
 					<option value="bench press">Bench Press</option>
 				</select>
 			</div>
-			<div className="flex justify-center">
-				{chosenExercise != 'null' ? (
+			<div className="mt-4">
+				{chosenExercise !== 'null' ? (
 					<LineChart width={320} height={300} data={data}>
-						<Line type="monotone" dataKey="uv" stroke="#8884d8" />
+						<Line type="monotone" dataKey="value" stroke="#8884d8" />
 						<CartesianGrid stroke="#ccc" />
 						<XAxis dataKey="name" />
 						<YAxis />
