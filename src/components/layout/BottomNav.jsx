@@ -27,7 +27,9 @@ export default function BottomNav() {
 						</Link>
 					</li>
 					<li>
-						<Progress className="h-6 w-6" />
+						<Link to="/progress">
+							<Progress className="h-6 w-6" />
+						</Link>
 					</li>
 					<li>
 						<Link to="/account">
