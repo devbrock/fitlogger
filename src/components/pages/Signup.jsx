@@ -1,11 +1,25 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { ReactComponent as Logo } from "../../assets/svgs/logo.svg";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router";
+import app from "../../firebase";
 
-export default function Signup() {
-  const onSubmit = e => {
-    e.preventDefault();
-  };
+const Signup = ({ history }) => {
+  const handleSignUp = useCallback(
+    async event => {
+      event.preventDefault();
+      const { email, password } = event.target.elements;
+      try {
+        await app
+          .auth()
+          .createUserWithEmailAndPassword(email.value, password.value);
+        history.push("/");
+      } catch (error) {
+        alert(error);
+      }
+    },
+    [history]
+  );
 
   return (
     <div className="pt-24">
@@ -14,22 +28,24 @@ export default function Signup() {
         Sign Up
       </h1>
       <div className="max-w-xs mx-auto bg-white shadow py-8 px-6">
-        <form className="flex flex-col mb-4" onSubmit={onSubmit}>
+        <form className="flex flex-col mb-4" onSubmit={handleSignUp}>
           <label>Email</label>
           <input
-            type="text"
+            type="email"
+            name="email"
             className="bg-gray-200 p-1 border rounded mb-4 border-primary-900"
           />
           <label>Password</label>
           <input
             type="password"
+            name="password"
             className="bg-gray-200 p-1 border rounded mb-4 border-primary-900"
           />
-          <label>Confirm Password</label>
+          {/* <label>Confirm Password</label>
           <input
             type="password"
             className="bg-gray-200 p-1 border rounded mb-8 border-primary-900"
-          />
+          /> */}
           <button className="bg-primary-900 py-2 px-3 text-white rounded w-24 mx-auto">
             Sign Up
           </button>
@@ -45,4 +61,6 @@ export default function Signup() {
       </div>
     </div>
   );
-}
+};
+
+export default withRouter(Signup);

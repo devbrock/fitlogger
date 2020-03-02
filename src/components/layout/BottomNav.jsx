@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 export default function BottomNav() {
   return (
     <div>
-      <div class="fixed bottom-0 left-0 bg-primary-900 w-full h-24 px-6">
+      <div className="fixed bottom-0 left-0 bg-primary-900 w-full h-24 px-6">
         <ul className="flex justify-between text-white text-sm mt-8">
           <li>
             <Link to="/">
@@ -28,7 +28,9 @@ export default function BottomNav() {
             <Progress className="h-6 w-6" />
           </li>
           <li>
-            <Account className="h-6 w-6" />
+            <Link to="/account">
+              <Account className="h-6 w-6" />
+            </Link>
           </li>
         </ul>
       </div>

@@ -1,11 +1,32 @@
-import React from "react";
+import React, { useCallback, useContext } from "react";
 import { ReactComponent as Logo } from "../../assets/svgs/logo.svg";
 import { Link } from "react-router-dom";
+import { withRouter, Redirect } from "react-router";
+import app from "../../firebase";
+import { AuthContext } from "../../Auth";
 
-export default function Login() {
-  const onSubmit = e => {
-    e.preventDefault();
-  };
+const Login = ({ history }) => {
+  const handleLogin = useCallback(
+    async event => {
+      event.preventDefault();
+      const { email, password } = event.target.elements;
+      try {
+        await app
+          .auth()
+          .signInWithEmailAndPassword(email.value, password.value);
+        history.push("/");
+      } catch (error) {
+        alert(error);
+      }
+    },
+    [history]
+  );
+
+  const { currentUser } = useContext(AuthContext);
+
+  if (currentUser) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <div className="pt-24">
@@ -14,17 +35,22 @@ export default function Login() {
         login
       </h1>
       <div className="max-w-xs mx-auto bg-white shadow py-8 px-6">
-        <form className="flex flex-col mb-4" onSubmit={onSubmit}>
+        <form className="flex flex-col mb-4" onSubmit={handleLogin}>
           <label>Email</label>
           <input
-            type="text"
+            type="email"
+            name="email"
             className="bg-gray-200 p-1 border rounded mb-4 border-primary-900"
           />
           <label>Password</label>
           <input
             type="password"
+            name="password"
             className="bg-gray-200 p-1 border rounded mb-8 border-primary-900"
           />
+          <span className="text-right capitalize font-light text-xs text-red-600 mb-8">
+            Forgot password?
+          </span>
           <button className="bg-primary-900 py-2 px-6 text-white rounded w-24 mx-auto">
             Login
           </button>
@@ -38,4 +64,6 @@ export default function Login() {
       </div>
     </div>
   );
-}
+};
+
+export default withRouter(Login);
