@@ -29,11 +29,11 @@ export default function Progress() {
 					<option value="bench press">Bench Press</option>
 				</select>
 			</div>
-			<div className="mt-4">
+			<div className="mt-8">
 				{chosenExercise !== 'null' ? (
 					<LineChart width={320} height={300} data={data}>
-						<Line type="monotone" dataKey="value" stroke="#8884d8" />
-						<CartesianGrid stroke="#ccc" />
+						<Line type="monotone" dataKey="value" stroke="#121223" />
+						<CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
 						<XAxis dataKey="name" />
 						<YAxis />
 					</LineChart>
