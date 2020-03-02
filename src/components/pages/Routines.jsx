@@ -33,13 +33,13 @@ export default function Routines() {
 			<div className="mt-6 z-40">
 				<ul>
 					{routines.map(routine => (
-						<li className="mb-4">
+						<li kye={routine.id} className="mb-4">
 							<div className="px-4 py-6 rounded bg-white shadow ">
 								<h3 className="text-md font-medium">{routine.title}</h3>
 								<h4 className="text-sm font-light">
 									Exercises:
 									{routine.exercises.map(exercise => (
-										<span className="text-sm font-light mx-1">
+										<span key={exercise.id} className="text-sm font-light mx-1">
 											{exercise.name}
 										</span>
 									))}
