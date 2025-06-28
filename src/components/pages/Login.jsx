@@ -7,7 +7,7 @@ import { AuthContext } from "../../Auth";
 
 const Login = ({ history }) => {
   const handleLogin = useCallback(
-    async event => {
+    async (event) => {
       event.preventDefault();
       const { email, password } = event.target.elements;
       try {
@@ -32,7 +32,7 @@ const Login = ({ history }) => {
     <div className="pt-24">
       <Logo className="mx-auto mb-4" />
       <h1 className="text-primary-900 mb-4 text-center uppercase font-bold">
-        login
+        Login
       </h1>
       <div className="max-w-xs mx-auto bg-white shadow py-8 px-6">
         <form className="flex flex-col mb-4" onSubmit={handleLogin}>
